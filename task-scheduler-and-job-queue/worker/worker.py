@@ -1,5 +1,5 @@
 from api.app import get_db
-from queue.job_queue import JobQueue
+from job_queue.job_queue import JobQueue
 import datetime
 import time
 import threading
@@ -17,7 +17,10 @@ class Worker:
             completed_query = '''INSERT INTO job_logs (job_id, worker_id, status, started_at, completed_at)
                 VALUES (%s, %s, 'completed', %s, NOW())'''
             cursor.execute(completed_query, completed_job_params)
+            completed_job_query = '''UPDATE jobs SET status='completed', updated_at=NOW() WHERE id=%s'''
+            cursor.execute(completed_job_query, (job[0],))
             conn.commit()
+            print(f'Job with job id:{job[0]} completed processing')
         except Exception as e:
             print("Error executing job: %s", e)
             Worker.handle_failure(conn, job)

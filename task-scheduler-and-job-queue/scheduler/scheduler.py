@@ -1,8 +1,8 @@
 import threading
-from worker import Worker
+from worker.worker import Worker
 import time
 from api.app import get_db
-from queue.job_queue import JobQueue
+from job_queue.job_queue import JobQueue
 
 class Scheduler:
 
@@ -25,6 +25,7 @@ class Scheduler:
         cursor = conn.cursor()
         sql_query = '''UPDATE jobs SET status='processing', updated_at = NOW() WHERE id=%s'''
         cursor.execute(sql_query, (job_id,))
+        print(f'Job with job id:{job_id} marked for processing')
         conn.commit()
 
     @staticmethod

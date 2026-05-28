@@ -46,3 +46,5 @@ CREATE INDEX idx_jobs_status ON jobs(status);
 CREATE INDEX idx_jobs_scheduled_at ON jobs(scheduled_at);
 CREATE INDEX idx_jobs_priority ON jobs(priority);
 CREATE INDEX idx_jobs_scheduler ON jobs(status, priority, scheduled_at);
+
+INSERT INTO tasks (name, code_ref) VALUES ('sample task', '../');
