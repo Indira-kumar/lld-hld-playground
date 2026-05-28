@@ -3,7 +3,7 @@ import os
 from typing import Optional
 from fastapi import APIRouter, FastAPI, Depends, HTTPException
 from pydantic_settings import BaseSettings
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 from datetime import datetime
 from psycopg2 import pool
 import redis
@@ -25,13 +25,13 @@ settings = Settings()
 
 # models
 class JobCreateRequest(BaseModel):
-    cron_id: Optional[int]
+    cron_id: Optional[int] = None
     task_id: int
-    params: Optional[object] = {}
-    priority: Optional[int] = 0,
-    created_at: datetime = datetime.now()
-    updated_at: datetime = datetime.now() 
-    scheduled_at: Optional[datetime]
+    params: Optional[dict] = None
+    priority: int = 0
+    created_at: datetime = Field(default_factory=datetime.now)
+    updated_at: datetime = Field(default_factory=datetime.now)
+    scheduled_at: Optional[datetime] = None
 
 
 # DB connection setup
@@ -76,7 +76,7 @@ async def read_job(job_id:int, conn=Depends(get_db)):
         raise HTTPException(status_code=404, detail='Job not found')
     return job
 
-@job_router.post('/')
+@job_router.post('')
 async def create_job(job: JobCreateRequest, conn=Depends(get_db)):
     cur = conn.cursor()
     cur.execute(
