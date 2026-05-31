@@ -50,7 +50,7 @@ Use [RADIO framework](https://www.greatfrontend.com/front-end-system-design-play
 - server (TRIVIA api - black box to UI)
 
 ## Architecture
-
+https://excalidraw.com/#json=tD3jDMcnQ16oDMbgSpnuo,XfAiofrv5QNMryuiURdGsA
 
 # Data Model
 ## API response
