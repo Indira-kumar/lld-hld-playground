@@ -1,0 +1,50 @@
+{
+  "results": {
+    "passed": [
+      {
+        "status": "success",
+        "test_scenario_name": "test_concrete_classes_inherit_and_implement_send_notification"
+      },
+      {
+        "status": "success",
+        "test_scenario_name": "test_send_notification_method_exists"
+      },
+      {
+        "status": "success",
+        "test_scenario_name": "test_methods"
+      },
+      {
+        "status": "success",
+        "test_scenario_name": "test_parent_class"
+      }
+    ],
+    "failed": [
+      {
+        "status": "error",
+        "test_scenario_name": "test_add_observer",
+        "message": "TypeError: __init__() missing 1 required positional argument: 'name'"
+      },
+      {
+        "status": "error",
+        "test_scenario_name": "test_inherits_from_publisher",
+        "message": "TypeError: __init__() missing 1 required positional argument: 'name'"
+      },
+      {
+        "status": "error",
+        "test_scenario_name": "test_remove_observer",
+        "message": "TypeError: __init__() missing 1 required positional argument: 'name'"
+      },
+      {
+        "status": "error",
+        "test_scenario_name": "test_update_stock_price_does_not_notify_observers_below_threshold",
+        "message": "TypeError: __init__() missing 1 required positional argument: 'name'"
+      },
+      {
+        "status": "error",
+        "test_scenario_name": "test_update_stock_price_notifies_observers_above_threshold",
+        "message": "TypeError: __init__() missing 1 required positional argument: 'name'"
+      }
+    ]
+  },
+  "time_taken": 0.005
+}
