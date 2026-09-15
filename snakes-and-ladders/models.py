@@ -4,6 +4,8 @@ from dataclasses import dataclass
 @dataclass
 class Board:
     n: int
+    special_chars: dict[int, int, SpecialChars]
+    positions: list[list[list[Piece]]]
 
 @dataclass
 class Position:
@@ -25,24 +27,23 @@ class Player:
     color: str
 
 @dataclass
-class Snake:
+class SpecialChars:
     start_pos: Position
     end_pos: Position
-
 @dataclass
-class Frog:
-    start_pos: Position
-    end_pos: Position
-
+class Snake(SpecialChars):
+    name: str = 'snake'
 @dataclass
-class Ladder:
-    start_pos: Position
-    end_pos: Position
+class Frog(SpecialChars):
+    name: str = 'frog'
+@dataclass
+class Ladder(SpecialChars):
+    name: str = 'ladder'
 
 @dataclass
 class Game:
     players: list[Player]
-    pieces: list[Piece]
+    pieces: dict[str, list[Piece]]
     board: Board
     snakes: list[Snake]
     frogs: list[Frog]
