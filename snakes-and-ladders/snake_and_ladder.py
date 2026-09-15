@@ -63,8 +63,8 @@ def create_game() -> Game:
             cnt += 1
         else:
             continue
-
-    board = Board(n=dims, special_chars=special_chars)
+    positions = [[[] for j in range(dims)] for i in range(dims)]
+    board = Board(n=dims, special_chars=special_chars, positions=positions)
 
     return Game(players=players, pieces=pieces, board=board, snakes=snakes, frogs=frogs, ladders=ladders, no_of_pieces=no_of_pieces)
 
