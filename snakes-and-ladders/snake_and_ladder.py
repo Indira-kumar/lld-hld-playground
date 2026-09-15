@@ -3,34 +3,25 @@ from random import randint
 from .models import *
 
 def create_game() -> Game:
-    no_of_players = input("Enter number of players: ")
-    while (no_of_players < 2):
-        print("Number of players can't be less than 2.")
-        no_of_players = input("Enter number of players: ")
-    no_of_pieces = input("Enter number of pieces: ")
-    while (no_of_pieces < 1):
-        print("Number of pieces can't be less than 1.")
-        no_of_pieces = input("Enter number of pieces: ")
+    no_of_players = _get_valid_count_helper('no. of players', 2)
+    no_of_pieces = _get_valid_count_helper('no. of pieces', 1)
     players = []
     for _ in no_of_players:
-        name = input("Enter your name: ")
-        color = input("Enter your color: ")
-        age = input("Enter your age: ")
-        gender = input("Enter your gender: ")
+        name = input("\n\nEnter your name: ")
+        color = input("\nEnter your color: ")
+        age = input("\nEnter your age: ")
+        gender = input("\nEnter your gender: ")
         player = Player(name=name, color=color, age=age, gender=gender)
         players.append(player)
 
-    dims = input("Enter the dimension of the board: ")
-    while (dims < 5):
-        print("Number of dimensions can't be less than 5.")
-        dims = input("Enter the dimension of the board: ")
+    dims = _get_valid_count_helper('dimension of board', 5)
     board = Board(n=dims)
     pieces = []
     for i, player in enumerate(players):
         for j in range(no_of_pieces):
             piece = Piece(id=(i*no_of_players + j), color=player.color, position=Position(-1,-1), player=player)
             pieces.append(piece)
-    print("Pieces Initialized")
+    print("\nPieces Initialized")
 
     no_of_snakes = randint(1, dims)
     no_of_frogs = randint(1, dims)
@@ -53,9 +44,15 @@ def create_game() -> Game:
 
     return Game(players=players, pieces=pieces, board=board, snakes=snakes, frogs=frogs, ladders=ladders, no_of_pieces=no_of_pieces)
 
+def _get_valid_count_helper(var_name: str, min_count: int):
+    var = input(f"\nEnter the {var_name}: ")
+    while (var < min_count):
+        print(f"\nNumber of {var_name} can't be less than {min_count}.")
+        var = input(f"\nEnter the {var_name}: ")
+    return var
 
 def play_game(game:Game):
-    pass
+    print("Game Started")
 
 
 def __main__():
